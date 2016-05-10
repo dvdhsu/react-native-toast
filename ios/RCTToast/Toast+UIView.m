@@ -14,8 +14,8 @@ static const CGFloat CSToastHorizontalPadding   = 10.0;
 static const CGFloat CSToastVerticalPadding     = 10.0;
 static const CGFloat CSToastTopBottomOffset     = 20.0;
 static const CGFloat CSToastCornerRadius        = 5.0;
-static const CGFloat CSToastOpacity             = 0.8;
-static const CGFloat CSToastFontSize            = 16.0;
+static const CGFloat CSToastOpacity             = 0.9;
+static const CGFloat CSToastFontSize            = 17.0;
 static const CGFloat CSToastMaxTitleLines       = 0;
 static const CGFloat CSToastMaxMessageLines     = 0;
 static const NSTimeInterval CSToastFadeDuration = 0.2;
@@ -183,7 +183,10 @@ static UIView *prevToast = NULL;
 
     UIView *activityView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CSToastActivityWidth, CSToastActivityHeight)];
     activityView.center = [self centerPointForPosition:position withToast:activityView withAddedPixelsY:0];
-    activityView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:CSToastOpacity];
+    activityView.backgroundColor = [UIColor colorWithRed:40.0f/255.0f
+                                                    green:191.0f/255.0f
+                                                     blue:130.0f/255.0f
+                                                   alpha:1.0f];
     activityView.alpha = 0.0;
     activityView.autoresizingMask = (UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin);
     activityView.layer.cornerRadius = CSToastCornerRadius;
@@ -284,7 +287,10 @@ static UIView *prevToast = NULL;
         wrapperView.layer.shadowOffset = CSToastShadowOffset;
     }
 
-    wrapperView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:CSToastOpacity];
+    wrapperView.backgroundColor = [UIColor colorWithRed:40.0f/255.0f
+                                                   green:191.0f/255.0f
+                                                    blue:130.0f/255.0f
+                                                   alpha:1.0f];
     
     if(image != nil) {
         imageView = [[UIImageView alloc] initWithImage:image];
@@ -306,11 +312,14 @@ static UIView *prevToast = NULL;
     if (title != nil) {
         titleLabel = [[UILabel alloc] init];
         titleLabel.numberOfLines = CSToastMaxTitleLines;
-        titleLabel.font = [UIFont boldSystemFontOfSize:CSToastFontSize];
+        titleLabel.font = [UIFont fontWithName:@"Avenir" size:CSToastFontSize];
         titleLabel.textAlignment = NSTextAlignmentLeft;
         titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
         titleLabel.textColor = [UIColor whiteColor];
-        titleLabel.backgroundColor = [UIColor clearColor];
+        titleLabel.backgroundColor = [UIColor colorWithRed:40.0f/255.0f
+                                                     green:191.0f/255.0f
+                                                      blue:130.0f/255.0f
+                                                     alpha:CSToastOpacity];
         titleLabel.alpha = 1.0;
         titleLabel.text = title;
         
@@ -323,10 +332,13 @@ static UIView *prevToast = NULL;
     if (message != nil) {
         messageLabel = [[UILabel alloc] init];
         messageLabel.numberOfLines = CSToastMaxMessageLines;
-        messageLabel.font = [UIFont systemFontOfSize:CSToastFontSize];
+        messageLabel.font = [UIFont fontWithName:@"Avenir" size:CSToastFontSize];
         messageLabel.lineBreakMode = NSLineBreakByWordWrapping;
         messageLabel.textColor = [UIColor whiteColor];
-        messageLabel.backgroundColor = [UIColor clearColor];
+        messageLabel.backgroundColor = [UIColor colorWithRed:40.0f/255.0f
+                                                     green:191.0f/255.0f
+                                                      blue:130.0f/255.0f
+                                                     alpha:CSToastOpacity];
         messageLabel.alpha = 1.0;
         messageLabel.text = message;
         
