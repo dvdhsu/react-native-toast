@@ -1,6 +1,16 @@
 package com.remobile.toast;
 
 import android.view.Gravity;
+import android.graphics.drawable.GradientDrawable;
+import android.os.Build;
+import android.os.CountDownTimer;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.graphics.drawable.GradientDrawable;
 
 import com.facebook.common.logging.FLog;
 import com.facebook.react.bridge.*;
@@ -43,13 +53,37 @@ public class Toast extends ReactContextBaseJavaModule implements LifecycleEventL
                 if ("top".equals(position)) {
                     toast.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, 20 + addPixelsY);
                 } else if ("bottom".equals(position)) {
-                    toast.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 20 - addPixelsY);
+                    toast.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 100);
                 } else if ("center".equals(position)) {
                     toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL, 0, addPixelsY);
                 } else {
                     FLog.e("RCTToast", "invalid position. valid options are 'top', 'center' and 'bottom'");
                     return;
                 }
+
+                final String backgroundColor = "#28BF82";
+                final String textColor = "#ffffff";
+                final double opacity = 0.9;
+                final int cornerRadius = 5;
+                final int horizontalPadding = 35;
+                final int verticalPadding = 20;
+
+                final Double textSize = 17.0;
+                Typeface tf = Typeface.createFromAsset(getReactApplicationContext().getAssets(), "fonts/avenir.otf");
+
+                GradientDrawable shape = new GradientDrawable();
+                shape.setCornerRadius(cornerRadius);
+                shape.setAlpha((int)(opacity * 255)); // 0-255, where 0 is an invisible background
+                shape.setColor(Color.parseColor(backgroundColor));
+                toast.getView().setBackground(shape);
+
+                final TextView toastTextView;
+                toastTextView = (TextView) toast.getView().findViewById(android.R.id.message);
+                toastTextView.setTextColor(Color.parseColor(textColor));
+                toastTextView.setTextSize(textSize.floatValue());
+                toastTextView.setTypeface(tf);
+
+                toast.getView().setPadding(horizontalPadding, verticalPadding, horizontalPadding, verticalPadding);
 
                 toast.show();
                 mostRecentToast = toast;
